@@ -1,5 +1,6 @@
 const express = require('express')
 const cors = require('cors')
+const dbConnect = require('./config/mongo')
 require('dotenv').config();
 
 // init app with express
@@ -12,3 +13,5 @@ const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`server started on port ${port}`)
 });
+
+dbConnect()
