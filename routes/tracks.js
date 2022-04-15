@@ -1,4 +1,5 @@
 const { Router } = require('express')
+const { validatorCreateItem } = require('../validators/tracks')
 const {
   getItems,
   getItem,
@@ -11,6 +12,6 @@ const router = Router();
 
 // TODO: http://localhost/api/tracks GET, POST, DELETE, PUT
 router.get('/', getItems)
-router.post('/', createItem)
+router.post('/', validatorCreateItem, createItem)
 
 module.exports = router;
