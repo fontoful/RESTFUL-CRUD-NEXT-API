@@ -25,7 +25,6 @@ const getItem = async (req, res) => {
   try {
     const cleanRequest = matchedData(req)
     const { id } = cleanRequest;
-    debugger;
     const data = await tracksModel.findById(id)
     res.send({ data })
   } catch (error) {
