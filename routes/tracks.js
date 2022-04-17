@@ -12,6 +12,7 @@ const {
 const router = Router();
 
 // TODO: http://localhost/api/tracks GET, POST, DELETE, PUT
+
 /**
  * Get all the items
  */
@@ -26,5 +27,15 @@ router.get('/:id', validatorGetItem, getItem)
  * Create one item
  */
 router.post('/', validatorCreateItem, createItem)
+
+/**
+ * Update one item
+ */
+router.put('/:id', validatorGetItem, validatorCreateItem, updateItem)
+
+/**
+ * Delete one item
+ */
+router.delete('/:id', validatorGetItem, deleteItem)
 
 module.exports = router;
