@@ -8,6 +8,7 @@ const {
   updateItem,
   deleteItem,
 } = require('../controllers/tracks');
+const authMiddleware = require('../middleware/session');
 
 const router = Router();
 
@@ -16,7 +17,7 @@ const router = Router();
 /**
  * Get all the items
  */
-router.get('/', getItems)
+router.get('/', authMiddleware, getItems)
 
 /**
  * Get a single item
