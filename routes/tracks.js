@@ -9,6 +9,7 @@ const {
   deleteItem,
 } = require('../controllers/tracks');
 const authMiddleware = require('../middleware/session');
+const checkRole = require('../middleware/role');
 
 const router = Router();
 
@@ -22,21 +23,21 @@ router.get('/', authMiddleware, getItems)
 /**
  * Get a single item
  */
-router.get('/:id', validatorGetItem, getItem)
+router.get('/:id', authMiddleware, validatorGetItem, getItem)
 
 /**
  * Create one item
  */
-router.post('/', validatorCreateItem, createItem)
+router.post('/', authMiddleware, checkRole(['user']) ,validatorCreateItem, createItem)
 
 /**
  * Update one item
  */
-router.put('/:id', validatorGetItem, validatorCreateItem, updateItem)
+router.put('/:id', authMiddleware, validatorGetItem, validatorCreateItem, updateItem)
 
 /**
  * Delete one item
  */
-router.delete('/:id', validatorGetItem, deleteItem)
+router.delete('/:id', authMiddleware, validatorGetItem, deleteItem)
 
 module.exports = router;
