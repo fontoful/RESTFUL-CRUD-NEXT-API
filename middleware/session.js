@@ -19,7 +19,6 @@ const authMiddleware = async (req, res, next) => {
     }
 
     const user = await usersModel.findById(dataToken._id)
-    debugger;
     req.user = user
     // inject a user property to the req object if we got this far
     next()
