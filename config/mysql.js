@@ -10,6 +10,16 @@ const sequelize = new Sequelize(database, user, password, {
   dialect: 'mysql',
 });
 
+const dbConnectMySql = async () => {
+  try {
+    await sequelize.authenticate()
+    console.log('MYSQL Conexión correcta');
+  } catch (error) {
+    console.log('MYSQL Error de conexión', e);
+  }
+}
+
 module.exports = {
-  sequelize
+  sequelize,
+  dbConnectMySql
 }
