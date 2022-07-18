@@ -36,5 +36,3 @@ app.listen(port, () => {
 });
 
 ENGINE_DB === 'nosql' ? dbConnect() : dbConnectMySql()
-
-dbConnect()
