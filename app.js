@@ -2,8 +2,12 @@ const express = require('express')
 const morganBody = require('morgan-body')
 const cors = require('cors')
 const dbConnect = require('./config/mongo')
+const { dbConnectMySql } = require('./config/mysql');
 require('dotenv').config();
 const loggerStream = require('./utils/handleLogger')
+
+// ENUM: nosql | mysql
+const ENGINE_DB = process.env.ENGINE_DB;
 
 // init app with express
 const app = express();
@@ -30,5 +34,7 @@ app.use('/api', require('./routes'))
 app.listen(port, () => {
   console.log(`server started on port ${port}`)
 });
+
+ENGINE_DB === 'nosql' ? dbConnect() : dbConnectMySql()
 
 dbConnect()
