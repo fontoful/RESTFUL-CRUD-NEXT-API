@@ -46,7 +46,17 @@ const loginController = async (req, res) => {
   }
 }
 
+const fetchAllUsersController = async (req, res) => {
+  try {
+    const users = await usersModel.find({})
+    res.send({ users })
+  } catch (error) {
+    handleHttpError(res, 'ERROR_GET_ITEMS')
+  }
+}
+
 module.exports = {
   registerController,
   loginController,
+  fetchAllUsersController
 }
