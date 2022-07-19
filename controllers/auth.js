@@ -56,7 +56,7 @@ const fetchAllUsersController = async (req, res) => {
 }
 
 module.exports = {
-  registerController,
+  fetchAllUsersController,
   loginController,
-  fetchAllUsersController
+  registerController,
 }
