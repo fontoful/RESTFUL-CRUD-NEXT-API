@@ -1,6 +1,8 @@
 const { handleHttpError } = require('../utils/handleError')
 const { usersModel } = require('../models')
 const { verifyToken } = require('../utils/handleJwt')
+const getProperties = require('../utils/handlePropertiesEngine');
+const propertiesKey = getProperties();
 
 const authMiddleware = async (req, res, next) => {
   try {
@@ -13,12 +15,17 @@ const authMiddleware = async (req, res, next) => {
 
     const dataToken = verifyToken(authorization)
 
-    if (!dataToken._id) {
-      handleHttpError(res, 'ERROR_ID_TOKEN', 401)
+    if (!dataToken) {
+      handleHttpError(res, 'NOT_PAYLOAD_DATA', 401)
       return
     }
 
-    const user = await usersModel.findById(dataToken._id)
+    const query = {
+      [propertiesKey.id]: dataToken[propertiesKey.id]
+    }
+
+    // use findOne method as both Mongoose and Sequelize (ORMS) have that method
+    const user = await usersModel.findOne(query)
     req.user = user
     // inject a user property to the req object if we got this far
     next()
