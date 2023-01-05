@@ -18,7 +18,7 @@ app.use(express.static('storage'))
 
 morganBody(app, {
   noColors: true,
-  stream: loggerStream,
+  // stream: loggerStream,
   skip: (req, res) => {
     return res.statusCode < 400
   }
