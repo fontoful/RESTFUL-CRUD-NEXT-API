@@ -48,7 +48,8 @@ const loginController = async (req, res) => {
 
 const fetchAllUsersController = async (req, res) => {
   try {
-    const users = await usersModel.find({})
+    // TODO: update this findAll to a method accessible in both sequelize and mongoose so it works cross dbs (NoSql and SQL)
+    const users = await usersModel.findAll({})
     res.send({ users })
   } catch (error) {
     handleHttpError(res, 'ERROR_GET_ITEMS')
