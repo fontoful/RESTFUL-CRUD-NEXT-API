@@ -28,7 +28,7 @@ const getItems = async (req, res) => {
 const getItem = async (req, res) => {
   try {
     const { id } = matchedData(req)
-    const data = await storageModel.findById(id)
+    const data = await storageModel.findByPk(id)
     res.send({ data })
   } catch (error) {
     handleHttpError(res, 'ERROR_GET_STORAGE')
