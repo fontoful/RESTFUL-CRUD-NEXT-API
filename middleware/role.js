@@ -6,6 +6,7 @@ const checkRole = (roles) => (req, res, next) => {
     
     /**
      * I'm following a course here but I strongly believe it should be a .every here rather than .some
+     * this logic is also flawed, the inner iteration .includes it's unnecessary and could simply triple check === primitives
      */
     const checkRoleValues = roles.some((middlewareRole) => userRoles.includes(middlewareRole))
 
