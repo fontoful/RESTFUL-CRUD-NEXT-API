@@ -28,7 +28,7 @@ router.get('/:id', authMiddleware, validatorGetItem, getItem)
 /**
  * Create one item
  */
-router.post('/', authMiddleware, checkRole(['user']) ,validatorCreateItem, createItem)
+router.post('/', authMiddleware, checkRole(['user', 'admin']), validatorCreateItem, createItem)
 
 /**
  * Update one item
