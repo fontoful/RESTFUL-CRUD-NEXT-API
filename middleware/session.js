@@ -7,16 +7,18 @@ const propertiesKey = getProperties();
 const authMiddleware = async (req, res, next) => {
   try {
     const { authorization } = req.headers || {}
+    const [_, auth] = authorization.split(' ');
+    debugger;
 
     if (!authorization) {
       handleHttpError(res, 'NO_TOKEN', 401)
       return
     }
 
-    const dataToken = verifyToken(authorization)
+    const dataToken = verifyToken(auth)
 
     if (!dataToken) {
-      handleHttpError(res, 'NOT_PAYLOAD_DATA', 401)
+      handleHttpError(res, 'TOKEN_EXPIRED', 401)
       return
     }
 
