@@ -16,13 +16,12 @@ const registerController = async (req, res) => {
   } catch (error) {
     handleHttpError(res, 'ERROR_REGISTER_USER')
   }
-
 }
 
 const loginController = async (req, res) => {
   try {
     const data = matchedData(req)
-    const user = await usersModel.findOne({ email: data.email }).select('password name role email')
+    const user = await usersModel.findOne({ where: { email: data.email }});
     
     if (!user) {
       handleHttpError(res, "USER_DOESNT_EXIST", 404)
