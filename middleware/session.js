@@ -1,8 +1,6 @@
 const { handleHttpError } = require('../utils/handleError')
 const { usersModel } = require('../models')
 const { verifyToken } = require('../utils/handleJwt')
-const getProperties = require('../utils/handlePropertiesEngine');
-const propertiesKey = getProperties();
 
 const authMiddleware = async (req, res, next) => {
   try {
@@ -16,13 +14,14 @@ const authMiddleware = async (req, res, next) => {
 
     const dataToken = verifyToken(auth)
 
-    if (!dataToken) {
-      handleHttpError(res, 'TOKEN_EXPIRED', 401)
+    // if a message exists, it means it threw an error
+    if (dataToken?.message) {
+      handleHttpError(res, dataToken.message, 401)
       return
     }
 
     const query = {
-      [propertiesKey.id]: dataToken[propertiesKey.id]
+      id: dataToken.id
     }
 
     // use findOne method as both Mongoose and Sequelize (ORMS) have that method

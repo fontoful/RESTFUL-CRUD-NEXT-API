@@ -1,11 +1,11 @@
-const ENGINE_DB = process.env.ENGINE_DB;
-
-const pathModels = ENGINE_DB === 'nosql' ? './nosql' : './mysql';
+const usersModel = require('./mysql/users')
+const tracksModel = require('./mysql/tracks')
+const storageModel = require('./mysql/storage')
 
 const models = {
-  usersModel: require(`${pathModels}/users`),
-  tracksModel: require(`${pathModels}/tracks`),
-  storageModel: require(`${pathModels}/storage`),
+  usersModel,
+  tracksModel,
+  storageModel,
 }
 
 module.exports = models;
