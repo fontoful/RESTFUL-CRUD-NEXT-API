@@ -8,7 +8,6 @@ const authMiddleware = async (req, res, next) => {
   try {
     const { authorization } = req.headers || {}
     const [_, auth] = authorization.split(' ');
-    debugger;
 
     if (!authorization) {
       handleHttpError(res, 'NO_TOKEN', 401)
