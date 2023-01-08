@@ -31,7 +31,7 @@ const Tracks = sequelize.define(
       type: DataTypes.INTEGER,
     },
     mediaId: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
     },
   },
   { timestamps: true },
