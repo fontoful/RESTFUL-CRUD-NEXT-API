@@ -13,7 +13,7 @@ const MEDIA_PATH = `${__dirname}/../storage`
  */
 const getItems = async (req, res) => { 
   try {
-    const data = await storageModel.find({})
+    const data = await storageModel.findAll({})
     res.send({ data })
   } catch (error) {
     handleHttpError(res, 'ERROR_GET_STORAGES')
@@ -69,11 +69,11 @@ const updateItem = async (req, res) => {}
 const deleteItem = async (req, res) => {
   try {
     const { id } = matchedData(req) || {}
-    const { filename } = await storageModel.findById(id)
+    const { filename } = await storageModel.findByPk(id)
     const filePath = `${MEDIA_PATH}/${filename}`
 
     // Do actual deletion (avoid shallow deletion here and use deleteOne)
-    await storageModel.deleteOne({ _id: id })
+    await storageModel.destroy({ where: { id }})
 
     fs.unlinkSync(filePath)
 
